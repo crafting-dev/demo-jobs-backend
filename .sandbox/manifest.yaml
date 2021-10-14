@@ -1,0 +1,11 @@
+hooks:
+  post-checkout:
+    cmd: 'bundle install'
+  build:
+    cmd: './build.sh'
+    dir: bin
+
+daemons:
+  app:
+    run:
+      cmd: 'rails s -p 3001'
