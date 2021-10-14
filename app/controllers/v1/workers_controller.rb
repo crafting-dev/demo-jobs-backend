@@ -1,4 +1,4 @@
-class WorkersController < ApplicationController
+class V1::WorkersController < ApplicationController
   def show
   end
 

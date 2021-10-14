@@ -1,4 +1,4 @@
-class PostingsController < ApplicationController
+class V1::PostingsController < ApplicationController
   def index
   end
 
