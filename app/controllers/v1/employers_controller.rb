@@ -1,38 +1,27 @@
 class V1::EmployersController < ApplicationController
+  before_action :set_employer, only: [:show, :update, :destroy]
+
+  # GET /employers/:id
   def show
-    @employer = Employer.find(params[:id])
+    respond_json(@employer)
   end
 
-  def new
-    @employer = Employer.new
-  end
-
+  # POST /employers
   def create
-    @employer = Employer.new(employer_params)
-    if @employer.save
-      # account creation success
-    else
-      # account creation failure
-      # render 'new'
-    end
+    @employer = Employer.create!(employer_params)
+    respond_json(@employer, :created)
   end
 
-  def edit
-    @employer = Employer.find(params[:id])
-  end
-
+  # PUT /employers/:id
   def update
-    @employer = Employer.find(params[:id])
-    if @employer.update_attributes(employer_params)
-      # success
-    else
-      # failure
-      # render 'edit'
-    end
+    @employer.update(employer_params)
+    head :no_content
   end
 
+  # DELETE /employers/:id
   def destroy
-    Employer.find(params[:id]).destroy
+    @employer.destroy
+    head :no_content
   end
 
   private
@@ -40,5 +29,9 @@ class V1::EmployersController < ApplicationController
     def employer_params
       params.require(:employer).permit(:name, :email, 
         :password, :password_confirmation, :location)
+    end
+
+    def set_employer
+      @employer = Employer.find(params[:id])
     end
 end
