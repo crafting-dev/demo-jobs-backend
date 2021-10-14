@@ -1,15 +1,15 @@
 class V1::EmployersController < ApplicationController
   before_action :set_employer, only: [:show, :update, :destroy]
 
-  # GET /employers/:id
-  def show
-    respond_json(@employer)
-  end
-
   # POST /employers
   def create
     @employer = Employer.create!(employer_params)
     respond_json(@employer, :created)
+  end
+
+  # GET /employers/:id
+  def show
+    respond_json(@employer)
   end
 
   # PUT /employers/:id
