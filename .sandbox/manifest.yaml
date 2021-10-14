@@ -3,7 +3,6 @@ hooks:
     cmd: 'bundle install'
   build:
     cmd: './build.sh'
-    dir: bin
 
 daemons:
   app:
