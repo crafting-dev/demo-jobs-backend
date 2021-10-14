@@ -20,7 +20,7 @@ class WorkersController < ApplicationController
   private
 
     def worker_params
-      params.require(:worker).permit(:name, :email, :password,
-                            :password_confirmation, :hourly_rate)
+      params.require(:worker).permit(:name, :email, 
+        :password, :password_confirmation, :hourly_rate)
     end
 end
