@@ -10,5 +10,6 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    add_index :workers, :email, unique: true
   end
 end
