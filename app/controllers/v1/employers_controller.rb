@@ -2,18 +2,55 @@
 
 module V1
   class EmployersController < ApplicationController
-    def index; end
+    before_action :set_employer, only: %i[show edit update destroy]
 
-    def show; end
+    # GET /employers
+    def index
+      @employers = Employer.all
+      respond_json(@employers)
+    end
 
-    def new; end
+    # GET /employers/:id
+    def show
+      respond_json(@employer)
+    end
 
-    def create; end
+    def new
+      @employer = Employer.new
+      respond_json(@employer)
+    end
 
-    def edit; end
+    # POST /employers
+    def create
+      @employer = Employer.create!(employer_params)
+      respond_json(@employer, :created)
+    end
 
-    def update; end
+    def edit
+      respond_json(@employer)
+    end
 
-    def destroy; end
+    # PUT /employers/:id
+    def update
+      @employer.update(employer_params)
+      head :no_content
+    end
+
+    # DELETE /employers/:id
+    def destroy
+      @employer.destroy
+      head :no_content
+    end
+
+    private
+
+    def employer_params
+      params.require(:employer).permit(:name, :email,
+                                       :password, :password_confirmation, :location)
+    end
+
+    def set_employer
+      @employer = Employer.find(params[:id])
+    end
   end
 end
