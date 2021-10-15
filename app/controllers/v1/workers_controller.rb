@@ -2,18 +2,55 @@
 
 module V1
   class WorkersController < ApplicationController
-    def index; end
+    before_action :set_worker, only: %i[show edit update destroy]
 
-    def show; end
+    # GET /workers
+    def index
+      @workers = Worker.all
+      respond_json(@workers)
+    end
 
-    def new; end
+    # GET /workers/:id
+    def show
+      respond_json(@worker)
+    end
 
-    def create; end
+    def new
+      @worker = Worker.new
+      respond_json(@worker)
+    end
 
-    def edit; end
+    # POST /workers
+    def create
+      @worker = Worker.create!(worker_params)
+      respond_json(@worker, :created)
+    end
 
-    def update; end
+    def edit
+      respond_json(@worker)
+    end
 
-    def destroy; end
+    # PUT /workers/:id
+    def update
+      @worker.update(worker_params)
+      head :no_content
+    end
+
+    # DELETE /workers/:id
+    def destroy
+      @worker.destroy
+      head :no_content
+    end
+
+    private
+
+    def worker_params
+      params.require(:worker).permit(:name, :email,
+                                     :password, :password_confirmation, :hourly_rate)
+    end
+
+    def set_worker
+      @worker = Worker.find(params[:id])
+    end
   end
 end
