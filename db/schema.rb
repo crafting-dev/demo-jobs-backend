@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_211_015_141_815) do
+ActiveRecord::Schema.define(version: 20_211_015_142_416) do
   create_table 'employers', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
     t.string 'name'
     t.string 'email'
@@ -21,5 +21,14 @@ ActiveRecord::Schema.define(version: 20_211_015_141_815) do
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['email'], name: 'index_employers_on_email', unique: true
+  end
+
+  create_table 'workers', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.string 'name'
+    t.string 'email'
+    t.string 'password_digest'
+    t.decimal 'hourly_rate', precision: 8, scale: 2
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 end
