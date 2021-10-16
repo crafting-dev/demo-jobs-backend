@@ -2,7 +2,7 @@
 
 module V1
   class EmployersController < ApplicationController
-    before_action :set_employer, only: %i[show edit update destroy]
+    before_action :set_employer, only: %i[show update destroy]
 
     # GET /employers
     def index
@@ -15,19 +15,10 @@ module V1
       respond_json(@employer)
     end
 
-    def new
-      @employer = Employer.new
-      respond_json(@employer)
-    end
-
     # POST /employers
     def create
       @employer = Employer.create!(employer_params)
       respond_json(@employer, :created)
-    end
-
-    def edit
-      respond_json(@employer)
     end
 
     # PUT /employers/:id
@@ -45,8 +36,7 @@ module V1
     private
 
     def employer_params
-      params.require(:employer).permit(:name, :email,
-                                       :password, :password_confirmation, :location)
+      params.require(:employer).permit(:name, :email, :password, :password_confirmation, :location)
     end
 
     def set_employer

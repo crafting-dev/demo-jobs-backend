@@ -2,7 +2,7 @@
 
 module V1
   class PostingsController < ApplicationController
-    before_action :set_posting, only: %i[show edit update destroy]
+    before_action :set_posting, only: %i[show update destroy]
 
     # GET /postings
     def index
@@ -15,19 +15,10 @@ module V1
       respond_json(@posting)
     end
 
-    def new
-      @posting = Posting.new
-      respond_json(@posting)
-    end
-
     # POST /postings
     def create
       @posting = Posting.create!(posting_params)
       respond_json(@posting, :created)
-    end
-
-    def edit
-      respond_json(@posting)
     end
 
     # PUT /postings/:id
@@ -45,8 +36,7 @@ module V1
     private
 
     def posting_params
-      params.require(:posting).permit(:title, :description,
-                                      :employer_id, :hours, :status)
+      params.require(:posting).permit(:title, :description, :employer_id, :hours, :status)
     end
 
     def set_posting

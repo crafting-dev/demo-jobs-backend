@@ -2,7 +2,7 @@
 
 module V1
   class AppsController < ApplicationController
-    before_action :set_app, only: %i[show edit update destroy]
+    before_action :set_app, only: %i[show update destroy]
 
     # GET /apps
     def index
@@ -15,19 +15,10 @@ module V1
       respond_json(@app)
     end
 
-    def new
-      @app = App.new
-      respond_json(@app)
-    end
-
     # POST /apps
     def create
       @app = App.create!(app_params)
       respond_json(@app, :created)
-    end
-
-    def edit
-      respond_json(@app)
     end
 
     # PUT /apps/:id
@@ -45,8 +36,7 @@ module V1
     private
 
     def app_params
-      params.require(:app).permit(:posting_id, :worker_id,
-                                  :content, :status)
+      params.require(:app).permit(:posting_id, :worker_id, :content, :status)
     end
 
     def set_app

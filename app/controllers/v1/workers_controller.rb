@@ -2,7 +2,7 @@
 
 module V1
   class WorkersController < ApplicationController
-    before_action :set_worker, only: %i[show edit update destroy]
+    before_action :set_worker, only: %i[show update destroy]
 
     # GET /workers
     def index
@@ -15,19 +15,10 @@ module V1
       respond_json(@worker)
     end
 
-    def new
-      @worker = Worker.new
-      respond_json(@worker)
-    end
-
     # POST /workers
     def create
       @worker = Worker.create!(worker_params)
       respond_json(@worker, :created)
-    end
-
-    def edit
-      respond_json(@worker)
     end
 
     # PUT /workers/:id
@@ -45,8 +36,7 @@ module V1
     private
 
     def worker_params
-      params.require(:worker).permit(:name, :email,
-                                     :password, :password_confirmation, :hourly_rate)
+      params.require(:worker).permit(:name, :email, :password, :password_confirmation, :hourly_rate)
     end
 
     def set_worker
