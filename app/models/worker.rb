@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Worker < ApplicationRecord
-  has_many :applications
+  has_many :apps
   has_many :tags, as: :taggable
 
   before_save :downcase_email

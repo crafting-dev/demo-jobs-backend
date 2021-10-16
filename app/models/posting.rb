@@ -2,7 +2,7 @@
 
 class Posting < ApplicationRecord
   belongs_to :employer
-  has_many :applications
+  has_many :apps
   has_many :tags, as: :taggable
 
   validates :title, presence: true, length: { maximum: 255 }

@@ -2,7 +2,7 @@
 
 class Employer < ApplicationRecord
   has_many :postings
-  has_many :applications, through: :postings
+  has_many :apps, through: :postings
   has_many :tags, as: :taggable
 
   before_save :downcase_email

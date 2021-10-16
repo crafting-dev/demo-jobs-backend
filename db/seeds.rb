@@ -11,7 +11,7 @@
 require 'faker'
 require 'date'
 
-# puts '== Depopulate all tables =='
+# Uncomment lines below to depopulate tables before seeding
 # Employer.delete_all
 # Worker.delete_all
 # Posting.delete_all
@@ -83,7 +83,7 @@ puts '== Populating Applications =='
   worker_id = rand(1..50)
   content = [greeting, 'I would like to apply to this position. I have attained my', Faker::Job.education_level,
              'and have excellent', Faker::Job.key_skill, 'skills. Looking forward to hearing from you. Thanks!'].reject(&:empty?).join(' ')
-  status = %w[applied expired rejected hired].sample # Make valid
+  status = %w[applied expired rejected hired].sample
   created_at = Faker::Date.backward(days: 10)
 
   status = 'expired' if (Date.current - created_at) > 7
@@ -96,4 +96,9 @@ puts '== Populating Applications =='
     status: status,
     created_at: created_at
   )
+end
+
+puts '== Preserving temporal logic =='
+Posting.where(status: 'expired').joins(:apps).where(apps: { status: 'applied' }).each do |post|
+  post.update!(status: 'posted')
 end
