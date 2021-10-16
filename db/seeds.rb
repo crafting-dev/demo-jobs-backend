@@ -11,7 +11,14 @@
 require 'faker'
 require 'date'
 
-(1..100).each do |id|
+# puts '== Depopulate all tables =='
+# Employer.delete_all
+# Worker.delete_all
+# Posting.delete_all
+# App.delete_all
+
+puts '== Populating Employers =='
+(1..25).each do |id|
   name = Faker::Name.name
   email = Faker::Internet.unique.email(name: name)
   password = Faker::Internet.password(min_length: 6)
@@ -28,7 +35,8 @@ require 'date'
   )
 end
 
-(1..200).each do |id|
+puts '== Populating Workers =='
+(1..50).each do |id|
   name = Faker::Name.name
   email = Faker::Internet.unique.email(name: name)
   password = Faker::Internet.password(min_length: 6)
@@ -45,16 +53,17 @@ end
   )
 end
 
-(1..1000).each do |id|
+puts '== Populating Postings =='
+(1..200).each do |id|
   title = Faker::Job.title
   description = [Faker::Job.employment_type, Faker::Job.field, Faker::Job.seniority, Faker::Job.position,
                  'needed with a particular skill in', Faker::Job.key_skill].reject(&:empty?).join(' ')
-  employer_id = rand(1..100)
+  employer_id = rand(1..25)
   hours = rand(10..100)
   status = %w[posted expired].sample
   created_at = Faker::Date.backward(days: 20)
 
-  status = expired if (Date.current - Date.parse(created_at)) > 14
+  status = 'expired' if (Date.current - created_at) > 14
 
   Posting.create!(
     id: id,
@@ -67,16 +76,17 @@ end
   )
 end
 
-(1..2000).each do |id|
+puts '== Populating Applications =='
+(1..500).each do |id|
   greeting = %w[Hi! Hello! Greetings! Hey!].sample
-  posting_id = rand(1..1000)
-  worker_id = rand(1..200)
+  posting_id = rand(1..200)
+  worker_id = rand(1..50)
   content = [greeting, 'I would like to apply to this position. I have attained my', Faker::Job.education_level,
              'and have excellent', Faker::Job.key_skill, 'skills. Looking forward to hearing from you. Thanks!'].reject(&:empty?).join(' ')
   status = %w[applied expired rejected hired].sample # Make valid
   created_at = Faker::Date.backward(days: 10)
 
-  status = expired if (Date.current - Date.parse(created_at)) > 7
+  status = 'expired' if (Date.current - created_at) > 7
 
   App.create!(
     id: id,
