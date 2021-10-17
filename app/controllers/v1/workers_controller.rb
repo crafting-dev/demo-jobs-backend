@@ -2,6 +2,7 @@
 
 module V1
   class WorkersController < ApplicationController
+    before_action :logged_in_worker, only: %i[index show update destroy]
     before_action :set_worker, only: %i[show update destroy]
 
     # GET /workers
@@ -41,6 +42,10 @@ module V1
 
     def set_worker
       @worker = Worker.find(params[:id])
+    end
+
+    def logged_in_worker
+      respond_json({ message: 'Please log in to proceed' }, :unprocessable_entity) unless logged_in? 'worker'
     end
   end
 end

@@ -2,6 +2,7 @@
 
 module V1
   class EmployersController < ApplicationController
+    before_action :logged_in_employer, only: %i[index show update destroy]
     before_action :set_employer, only: %i[show update destroy]
 
     # GET /employers
@@ -41,6 +42,10 @@ module V1
 
     def set_employer
       @employer = Employer.find(params[:id])
+    end
+
+    def logged_in_employer
+      respond_json({ message: 'Please log in to proceed' }, :unprocessable_entity) unless logged_in?('employer')
     end
   end
 end

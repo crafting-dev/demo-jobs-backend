@@ -1,49 +1,37 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  # POST /login_employer
   def create_employer
     employer = Employer.find_by(email: params[:email].downcase)
     if employer&.authenticate(params[:password])
-      session[:employer_id] = employer.id
+      log_in(employer)
       respond_json(employer)
     else
       respond_json({ message: 'Invalid email/password combination' }, :unprocessable_entity)
     end
   end
 
+  # DELETE /logout_employer
   def destroy_employer
-    session.delete(:employer_id) unless current_employer.nil?
+    log_out('employer') if logged_in?('employer')
     head :no_content
   end
 
+  # POST /login_worker
   def create_worker
     worker = Worker.find_by(email: params[:email].downcase)
     if worker&.authenticate(params[:password])
-      session[:worker_id] = worker.id
+      log_in(worker)
       respond_json(worker)
     else
       respond_json({ message: 'Invalid email/password combination' }, :unprocessable_entity)
     end
   end
 
+  # DELETE /logout_worker
   def destroy_worker
-    session.delete(:worker_id) unless current_worker.nil?
+    log_out('worker') if logged_in?('worker')
     head :no_content
-  end
-
-  private
-
-  # Returns the currently logged in employer.
-  def current_employer
-    return unless session[:employer_id]
-
-    @current_employer ||= Employer.find(session[:employer_id])
-  end
-
-  # Returns the currently logged in worker.
-  def current_worker
-    return unless session[:worker_id]
-
-    @current_worker ||= Worker.find(session[:worker_id])
   end
 end
