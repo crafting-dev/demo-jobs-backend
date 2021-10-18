@@ -17,23 +17,9 @@ RSpec.describe 'V1::Apps', type: :request do
     end
   end
 
-  describe 'GET /new' do
-    it 'returns http success' do
-      get '/v1/apps/new'
-      expect(response).to have_http_status(:success)
-    end
-  end
-
   describe 'GET /create' do
     it 'returns http success' do
       get '/v1/apps/create'
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe 'GET /edit' do
-    it 'returns http success' do
-      get '/v1/apps/edit'
       expect(response).to have_http_status(:success)
     end
   end

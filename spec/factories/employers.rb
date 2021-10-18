@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :employer do
-    name { 'MyString' }
-    email { 'MyString' }
-    password_digest { 'MyString' }
-    location { 'MyString' }
+    name { Faker::Name.name }
+    email { Faker::Internet.unique.email }
+    password_digest { Faker::Internet.password(min_length: 6) }
+    location { Faker::Address.full_address }
   end
 end

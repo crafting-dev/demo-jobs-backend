@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :tag do
-    content { 'MyString' }
+    content { Faker::Lorem.sentence }
     taggable { nil }
   end
 end

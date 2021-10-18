@@ -2,7 +2,8 @@
 
 module V1
   class PostingsController < ApplicationController
-    before_action :logged_in_user, only: %i[index show create update destroy]
+    before_action :is_logged_in, only: %i[index show create update destroy]
+    before_action :is_employer, only: %i[create destroy]
     before_action :set_posting, only: %i[show update destroy]
 
     # GET /postings
@@ -30,6 +31,9 @@ module V1
 
     # DELETE /postings/:id
     def destroy
+      if !current_user.postings.exists?(id: @posting.id)
+        respond_json({ message: 'Access denied' }, :unauthorized)
+      end
       @posting.destroy
       head :no_content
     end
@@ -44,10 +48,12 @@ module V1
       @posting = Posting.find(params[:id])
     end
 
-    def logged_in_user
-      unless logged_in?('employer') || logged_in?('worker')
-        respond_json({ message: 'Please log in to proceed' }, :unprocessable_entity)
-      end
+    def is_logged_in
+      respond_json({ message: 'Access denied' }, :unauthorized) unless logged_in?
+    end
+
+    def is_employer
+      respond_json({ message: 'Access denied' }, :unauthorized) unless current_user.instance_of?(Employer)
     end
   end
 end

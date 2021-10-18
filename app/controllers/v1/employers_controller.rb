@@ -2,14 +2,8 @@
 
 module V1
   class EmployersController < ApplicationController
-    before_action :logged_in_employer, only: %i[index show update destroy]
+    before_action :is_logged_in, only: %i[show update destroy]
     before_action :set_employer, only: %i[show update destroy]
-
-    # GET /employers
-    def index
-      @employers = Employer.all
-      respond_json(@employers)
-    end
 
     # GET /employers/:id
     def show
@@ -30,6 +24,9 @@ module V1
 
     # DELETE /employers/:id
     def destroy
+      if @employer.id != current_user.id
+        respond_json({ message: 'Access denied' }, :unauthorized)
+      end
       @employer.destroy
       head :no_content
     end
@@ -44,8 +41,8 @@ module V1
       @employer = Employer.find(params[:id])
     end
 
-    def logged_in_employer
-      respond_json({ message: 'Please log in to proceed' }, :unprocessable_entity) unless logged_in?('employer')
+    def is_logged_in
+      respond_json({ message: 'Access denied' }, :unauthorized) unless logged_in?
     end
   end
 end

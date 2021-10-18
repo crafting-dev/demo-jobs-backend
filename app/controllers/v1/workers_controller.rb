@@ -2,14 +2,8 @@
 
 module V1
   class WorkersController < ApplicationController
-    before_action :logged_in_worker, only: %i[index show update destroy]
+    before_action :is_logged_in, only: %i[show update destroy]
     before_action :set_worker, only: %i[show update destroy]
-
-    # GET /workers
-    def index
-      @workers = Worker.all
-      respond_json(@workers)
-    end
 
     # GET /workers/:id
     def show
@@ -30,6 +24,9 @@ module V1
 
     # DELETE /workers/:id
     def destroy
+      if @worker.id != current_user.id
+        respond_json({ message: 'Access denied' }, :unauthorized)
+      end
       @worker.destroy
       head :no_content
     end
@@ -44,8 +41,8 @@ module V1
       @worker = Worker.find(params[:id])
     end
 
-    def logged_in_worker
-      respond_json({ message: 'Please log in to proceed' }, :unprocessable_entity) unless logged_in? 'worker'
+    def is_logged_in
+      respond_json({ message: 'Access denied' }, :unauthorized) unless logged_in?
     end
   end
 end

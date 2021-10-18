@@ -3,5 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe Posting, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:all) do
+    @posting = create(:posting)
+  end
+
+  it 'has valid attributes' do
+    expect(@posting).to be_valid
+  end
 end

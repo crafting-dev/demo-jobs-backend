@@ -11,11 +11,12 @@
 require 'faker'
 require 'date'
 
-# Uncomment lines below to depopulate tables before seeding
-# Employer.delete_all
-# Worker.delete_all
-# Posting.delete_all
-# App.delete_all
+puts '== Cleaning database =='
+Employer.delete_all
+Worker.delete_all
+Posting.delete_all
+App.delete_all
+Tag.delete_all
 
 puts '== Populating Employers =='
 (1..25).each do |id|
@@ -35,6 +36,14 @@ puts '== Populating Employers =='
   )
 end
 
+puts '== Populating Employers Tags =='
+(1..25).each do |id|
+  Tag.create!(
+    taggable: Employer.find(id),
+    content: Faker::Lorem.sentence
+  )
+end
+
 puts '== Populating Workers =='
 (1..50).each do |id|
   name = Faker::Name.name
@@ -50,6 +59,14 @@ puts '== Populating Workers =='
     password: password,
     password_confirmation: password_confirmation,
     hourly_rate: hourly_rate
+  )
+end
+
+puts '== Populating Workers Tags =='
+(1..50).each do |id|
+  Tag.create!(
+    taggable: Worker.find(id),
+    content: Faker::Lorem.sentence
   )
 end
 
@@ -76,6 +93,14 @@ puts '== Populating Postings =='
   )
 end
 
+puts '== Populating Postings Tags =='
+(1..200).each do |id|
+  Tag.create!(
+    taggable: Posting.find(id),
+    content: Faker::Lorem.sentence
+  )
+end
+
 puts '== Populating Applications =='
 (1..500).each do |id|
   greeting = %w[Hi! Hello! Greetings! Hey!].sample
@@ -95,6 +120,14 @@ puts '== Populating Applications =='
     content: content,
     status: status,
     created_at: created_at
+  )
+end
+
+puts '== Populating Applications Tags =='
+(1..500).each do |id|
+  Tag.create!(
+    taggable: App.find(id),
+    content: Faker::Lorem.sentence
   )
 end
 

@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :app do
     posting_id { 1 }
     worker_id { 1 }
-    content { 'MyText' }
-    status { 'MyString' }
+    content { Faker::Lorem.paragraph }
+    status { 'applied' }
   end
 end

@@ -3,52 +3,38 @@
 require 'rails_helper'
 
 RSpec.describe 'V1::Employers', type: :request do
-  describe 'GET /index' do
-    it 'returns http success' do
-      get '/v1/employers/index'
-      expect(response).to have_http_status(:success)
+  describe 'GET /index without logging in' do
+    it 'returns http unauthorized' do
+      get '/api/v1/employers'
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 
   describe 'GET /show' do
     it 'returns http success' do
-      get '/v1/employers/show'
+      get '/api/v1/employers/:id'
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
+
+  describe 'POST /create' do
+    it 'returns http success' do
+      post '/api/v1/employers'
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe 'GET /new' do
+  describe 'PUT /update' do
     it 'returns http success' do
-      get '/v1/employers/new'
-      expect(response).to have_http_status(:success)
+      put '/api/v1/employers/:id'
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 
-  describe 'GET /create' do
+  describe 'DELETE /destroy' do
     it 'returns http success' do
-      get '/v1/employers/create'
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe 'GET /edit' do
-    it 'returns http success' do
-      get '/v1/employers/edit'
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe 'GET /update' do
-    it 'returns http success' do
-      get '/v1/employers/update'
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe 'GET /destroy' do
-    it 'returns http success' do
-      get '/v1/employers/destroy'
-      expect(response).to have_http_status(:success)
+      delete '/api/v1/employers/:id'
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 end
