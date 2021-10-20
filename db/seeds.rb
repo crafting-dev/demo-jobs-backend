@@ -12,7 +12,16 @@ Tag.delete_all
 ApiKey.delete_all
 
 Rails.logger.debug '== Populating Employers =='
-(1..25).each do |id|
+# Testing credentials for Employer user
+Employer.create!(
+  id: 1,
+  name: 'Bruce Wayne',
+  email: 'bruce@justiceleague.com',
+  password: 'batman_superhero',
+  password_confirmation: 'batman_superhero',
+  location: 'Earth'
+)
+(2..25).each do |id|
   name = Faker::Name.name
   email = Faker::Internet.unique.email(name: name)
   password = Faker::Internet.password(min_length: 8)
@@ -31,14 +40,29 @@ end
 
 Rails.logger.debug '== Populating Employers Tags =='
 (1..25).each do |id|
+  c1 = Faker::Job.title.split
+  c2 = Faker::Job.title.split
+  c3 = Faker::Job.field.split
+  c4 = c1 + c2 + c3
+  content = c4.uniq.join(', ')
+
   Tag.create!(
     taggable: Employer.find(id),
-    content: Faker::Lorem.words.join(', ')
+    content: content
   )
 end
 
 Rails.logger.debug '== Populating Workers =='
-(1..50).each do |id|
+# Testing credentials for Worker user
+Worker.create!(
+  id: 1,
+  name: 'Clark Kent',
+  email: 'clark@kentfarm.com',
+  password: 'superman',
+  password_confirmation: 'superman',
+  hourly_rate: 0.0
+)
+(2..50).each do |id|
   name = Faker::Name.name
   email = Faker::Internet.unique.email(name: name)
   password = Faker::Internet.password(min_length: 8)
@@ -57,9 +81,15 @@ end
 
 Rails.logger.debug '== Populating Workers Tags =='
 (1..50).each do |id|
+  c1 = Faker::Job.title.split
+  c2 = Faker::Job.title.split
+  c3 = Faker::Job.field.split
+  c4 = c1 + c2 + c3
+  content = c4.uniq.join(', ')
+
   Tag.create!(
     taggable: Worker.find(id),
-    content: Faker::Lorem.words.join(', ')
+    content: content
   )
 end
 
@@ -88,9 +118,15 @@ end
 
 Rails.logger.debug '== Populating Postings Tags =='
 (1..200).each do |id|
+  c1 = Faker::Job.title.split
+  c2 = Faker::Job.title.split
+  c3 = Faker::Job.field.split
+  c4 = c1 + c2 + c3
+  content = c4.uniq.join(', ')
+
   Tag.create!(
     taggable: Posting.find(id),
-    content: Faker::Lorem.words.join(', ')
+    content: content
   )
 end
 
@@ -118,9 +154,15 @@ end
 
 Rails.logger.debug '== Populating Applications Tags =='
 (1..500).each do |id|
+  c1 = Faker::Job.title.split
+  c2 = Faker::Job.title.split
+  c3 = Faker::Job.field.split
+  c4 = c1 + c2 + c3
+  content = c4.uniq.join(', ')
+
   Tag.create!(
     taggable: Application.find(id),
-    content: Faker::Lorem.words.join(', ')
+    content: content
   )
 end
 

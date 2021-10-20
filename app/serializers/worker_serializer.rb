@@ -3,8 +3,15 @@
 class WorkerSerializer
   include JSONAPI::Serializer
 
+  set_type :worker
+
   attributes :name, :email, :hourly_rate
-  has_many :applications
-  has_many :tags
-  has_many :api_keys
+
+  attribute :tags do |worker|
+    worker.tags.pluck(:content).join(', ').split(', ')
+  end
+
+  attribute :applications do |worker|
+    worker.applications.select(:id, :status, :posting_id, :created_at, :updated_at)
+  end
 end

@@ -13,7 +13,8 @@ module Api
           if employer&.authenticate(password)
             token = SecureRandom.hex
             api_key = employer.api_keys.create! token: token
-            render_json ApiKey.new(id: api_key.id, token_digest: token), :created and return
+            render_json ApiKey.new(id: api_key.id, token_digest: token), :created
+            return
           end
 
           worker = Worker.find_by email: email
@@ -21,7 +22,8 @@ module Api
           if worker&.authenticate(password)
             token = SecureRandom.hex
             api_key = worker.api_keys.create! token: token
-            render_json ApiKey.new(id: api_key.id, token_digest: token), :created and return
+            render_json ApiKey.new(id: api_key.id, token_digest: token), :created
+            return
           end
         end
 

@@ -3,8 +3,15 @@
 class EmployerSerializer
   include JSONAPI::Serializer
 
+  set_type :employer
+
   attributes :name, :email, :location
-  has_many :postings
-  has_many :tags, polymorphic: true
-  has_many :api_keys
+
+  attribute :tags do |employer|
+    employer.tags.pluck(:content).join(', ').split(', ')
+  end
+
+  attribute :postings do |employer|
+    employer.postings.select(:id, :title, :hours, :status, :created_at, :updated_at)
+  end
 end
