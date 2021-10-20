@@ -1,24 +1,51 @@
-# README
+# Demo Jobs Backend API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the backend Rails API for a demo app.
 
-Things you may want to cover:
+The demo app is a two sided marketplace (job board), where:
 
-* Ruby version
+- Employers can post jobs for workers to apply to
+- Workers can see a list of jobs, filter by keywords or tags, and apply
+- Employers can see their applicants and make a hire/no-hire decision
+- Job postings and applications can expire
+- Employers, workers, and job postings can have any custom tags
 
-* System dependencies
+## Endpoints
 
-* Configuration
+### Sessions
 
-* Database creation
+`POST /api/v1/sessions` Creates an authentication token to be used for subsequent requests for authorization.
 
-* Database initialization
+`DELETE /api/v1/sessions/:id` Deletes a previously authenticated token.
 
-* How to run the test suite
+### Employers
 
-* Services (job queues, cache servers, search engines, etc.)
+- TODO
 
-* Deployment instructions
+### Workers
 
-* ...
+- TODO
+
+### Postings
+
+- TODO
+
+### Applications
+
+- TODO
+
+## Authentication
+
+- TODO 
+
+## Serialization
+
+- TODO 
+
+## Testing
+
+- TODO
+
+## Local setup
+
+- TODO

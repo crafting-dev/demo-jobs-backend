@@ -82,6 +82,8 @@ GEM
       activesupport (>= 5.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    jsonapi-serializer (2.2.0)
+      activesupport (>= 4.2)
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -171,6 +173,10 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.12.0)
       parser (>= 3.0.1.1)
+    rubocop-rails (2.12.4)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.7.0, < 2.0)
     ruby-progressbar (1.11.0)
     spring (3.0.0)
     sprockets (4.0.2)
@@ -198,12 +204,13 @@ DEPENDENCIES
   byebug
   factory_bot_rails
   faker
+  jsonapi-serializer
   listen (~> 3.3)
   mysql2 (~> 0.5)
   puma (~> 5.0)
   rails (~> 6.1.4, >= 6.1.4.1)
   rspec-rails (~> 5.0.0)
-  rubocop (~> 1.22)
+  rubocop-rails
   spring
   tzinfo-data
 

@@ -2,10 +2,10 @@
 
 FactoryBot.define do
   factory :posting do
-    title { Faker::Job.title }
-    description { Faker::Lorem.paragraph }
-    employer_id { 1 }
+    title { 'MyString' }
+    description { 'MyText' }
+    employer { nil }
     hours { 1 }
-    status { 'posted' }
+    status { 'MyString' }
   end
 end

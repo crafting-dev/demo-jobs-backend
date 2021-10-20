@@ -3,9 +3,9 @@
 class CreateWorkers < ActiveRecord::Migration[6.1]
   def change
     create_table :workers do |t|
-      t.string :name
-      t.string :email
-      t.string :password_digest
+      t.string :name, null: false
+      t.string :email, null: false
+      t.string :password_digest, null: false
       t.decimal :hourly_rate, precision: 8, scale: 2
 
       t.timestamps

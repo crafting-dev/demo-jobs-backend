@@ -1,15 +1,23 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  post   '/login',  to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
-
-  scope :api do
+  namespace :api do
+    # API version v1
     namespace :v1 do
-      resources :employers, only: %i[create show update destroy]
-      resources :workers,   only: %i[create show update destroy]
-      resources :postings,  only: %i[index create show destroy]
-      resources :apps,      only: %i[index create show destroy]
+      # Sessions
+      resources :sessions, only: %i[create destroy]
+
+      # Employers
+      resources :employers, only: %i[show create update destroy]
+
+      # Workers
+      resources :workers, only: %i[show create update destroy]
+
+      # Postings
+      resources :postings, only: %i[index show create update destroy]
+
+      # Applications
+      resources :applications, only: %i[index show create update destroy]
     end
   end
 end

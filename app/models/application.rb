@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class App < ApplicationRecord
+class Application < ApplicationRecord
+  has_many :tags, as: :taggable, dependent: :destroy
   belongs_to :posting
   belongs_to :worker
-  has_many :tags, as: :taggable
 
   validates :content, presence: true
 end

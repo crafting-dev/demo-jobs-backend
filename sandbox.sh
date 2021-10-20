@@ -4,14 +4,14 @@
 # Configure sandbox for quick workspace setup.
 # ============================================
 
-# Install libgmp3
+echo '== Install libgmp3 =='
 sudo apt-get install libgmp3-dev -y
 
-# Install mysql client
+echo '== Install mysql client =='
 sudo apt-get install mysql-client libmysqlclient-dev -y
 
-# Update system
+echo '== Update system =='
 sudo apt-get update
 
-# Install rails
+echo '== Install latest rails =='
 gem install rails

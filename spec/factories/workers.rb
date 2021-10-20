@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :worker do
-    name { Faker::Name.name }
-    email { Faker::Internet.unique.email }
-    password_digest { Faker::Internet.password(min_length: 6) }
-    hourly_rate { Faker::Number.decimal(l_digits: 2, r_digits: 2) }
+    name { 'MyString' }
+    email { 'MyString' }
+    password_digest { 'MyString' }
+    hourly_rate { '9.99' }
   end
 end
