@@ -41,7 +41,7 @@ module Api
 
         # Define allowed parameters
         def application_params
-          params.permit(:content, :status, :posting_id, :worker_id)
+          params.require(:application).permit(:content, :status, :posting_id, :worker_id)
         end
 
         # Set the application whose id == params[:id]

@@ -34,7 +34,7 @@ module Api
 
         # Define allowed parameters
         def employer_params
-          params.permit(:name, :email, :password, :password_confirmation, :location)
+          params.require(:employer).permit(:name, :email, :password, :password_confirmation, :location)
         end
 
         # Set the employer whose id == params[:id]

@@ -2,10 +2,10 @@
 
 module Api
   module V1
-    class SessionsController < ApplicationController
+    class ApiKeysController < ApplicationController
       before_action :authenticate_by_key!, except: :create
 
-      # POST /sessions
+      # POST /authenticate
       def create
         authenticate_with_http_basic do |email, password|
           employer = Employer.find_by email: email
@@ -30,7 +30,7 @@ module Api
         render status: :unauthorized
       end
 
-      # DELETE /sessions
+      # DELETE /authenticate
       def destroy
         api_key = current_bearer.api_keys.find(params[:id])
         api_key.destroy
