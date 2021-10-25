@@ -1,8 +1,6 @@
-# frozen_string_literal: true
-
-class ApplicationSerializer
+class Api::V1::ApplicationSerializer
   include JSONAPI::Serializer
-
+  
   set_type :application
 
   attributes :status
@@ -29,5 +27,5 @@ class ApplicationSerializer
       id: object.worker.id,
       name: object.worker.name
     }
-  end
+  end 
 end

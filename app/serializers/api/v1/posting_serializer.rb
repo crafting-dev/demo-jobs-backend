@@ -1,8 +1,6 @@
-# frozen_string_literal: true
-
-class PostingSerializer
+class Api::V1::PostingSerializer
   include JSONAPI::Serializer
-
+  
   set_type :posting
 
   attributes :title, :hours, :status, :description, :created_at
@@ -25,5 +23,5 @@ class PostingSerializer
                                  params[:current_bearer].instance_of?(Employer) && params[:current_bearer].id == record.employer.id
                                } do |object|
     object.applications.joins(:worker).select(:id, 'workers.name', :status)
-  end
+  end 
 end
