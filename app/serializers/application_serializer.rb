@@ -5,13 +5,29 @@ class ApplicationSerializer
 
   set_type :application
 
-  attributes :content, :status
+  attributes :status
 
-  attribute :tags do |application|
-    application.tags.pluck(:content).join(', ').split(', ')
+  attribute :tags, if: proc { |record, params|
+                         !params[:is_collection] && record.tag.present?
+                       } do |object|
+    object.tag.content
   end
 
-  ### FIXME
-  belongs_to :posting
-  belongs_to :worker
+  attribute :content, if: proc { |_object, params|
+                            !params[:is_collection]
+                          }
+
+  attribute :posting do |object|
+    {
+      id: object.posting.id,
+      title: object.posting.title
+    }
+  end
+
+  attribute :worker do |object|
+    {
+      id: object.worker.id,
+      name: object.worker.name
+    }
+  end
 end

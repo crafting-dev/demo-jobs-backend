@@ -5,21 +5,25 @@ class PostingSerializer
 
   set_type :posting
 
-  attributes :title, :hours, :status
+  attributes :title, :hours, :status, :description, :created_at
 
-  attribute :tags do |posting|
-    posting.tags.pluck(:content).join(', ').split(', ')
-  end
-
-  attribute :employer do |posting|
+  attribute :employer do |object|
     {
-      id: posting.employer.id,
-      name: posting.employer.name,
-      email: posting.employer.email
+      id: object.employer.id,
+      name: object.employer.name,
+      location: object.employer.location
     }
   end
 
-  ### FIXME
-  attribute :description
-  has_many :applications
+  attribute :tags, if: proc { |record|
+                         record.tag.present?
+                       } do |object|
+    object.tag.content
+  end
+
+  attribute :applications, if: proc { |record, params|
+                                 params[:current_bearer].instance_of?(Employer) && params[:current_bearer].id == record.employer.id
+                               } do |object|
+    object.applications.joins(:worker).select(:id, 'workers.name', :status)
+  end
 end

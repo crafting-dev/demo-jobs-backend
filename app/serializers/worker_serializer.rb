@@ -7,11 +7,15 @@ class WorkerSerializer
 
   attributes :name, :email, :hourly_rate
 
-  attribute :tags do |worker|
-    worker.tags.pluck(:content).join(', ').split(', ')
+  attribute :tags, if: proc { |record|
+                         record.tag.present?
+                       } do |object|
+    object.tag.content
   end
 
-  attribute :applications do |worker|
-    worker.applications.select(:id, :status, :posting_id, :created_at, :updated_at)
+  attribute :applications, if: proc { |record, params|
+                                 params[:current_bearer].instance_of?(Worker) && params[:current_bearer].id == record.id
+                               } do |object|
+    object.applications.joins(:posting).select(:id, 'postings.title', :status)
   end
 end

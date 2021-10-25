@@ -7,11 +7,13 @@ class EmployerSerializer
 
   attributes :name, :email, :location
 
-  attribute :tags do |employer|
-    employer.tags.pluck(:content).join(', ').split(', ')
+  attribute :tags, if: proc { |record|
+                         record.tag.present?
+                       } do |object|
+    object.tag.content
   end
 
-  attribute :postings do |employer|
-    employer.postings.select(:id, :title, :hours, :status, :created_at, :updated_at)
+  attribute :postings do |object|
+    object.postings.select(:id, :title, :status)
   end
 end
