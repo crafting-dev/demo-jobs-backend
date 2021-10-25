@@ -18,3 +18,6 @@ sudo apt-get update
 
 echo '== Install latest rails =='
 gem install rails
+
+echo '== Run all migrations =='
+rails db:migrate
