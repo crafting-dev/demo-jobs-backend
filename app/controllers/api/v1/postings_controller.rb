@@ -22,6 +22,7 @@ module Api
       # POST /postings
       def create
         @posting = Posting.create!(posting_params)
+        ExpireJob.perform_in(14.days, 'posting', @posting.id)
         render_json @posting, :created, { params: { current_bearer: current_bearer } }
       end
 

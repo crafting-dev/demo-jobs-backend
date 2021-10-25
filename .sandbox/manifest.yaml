@@ -7,4 +7,7 @@ hooks:
 daemons:
   app:
     run:
-      cmd: 'rails s'
+      cmd: |
+        rails s
+        redis-server
+        bundle exec sidekiq
