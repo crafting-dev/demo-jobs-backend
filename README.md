@@ -90,12 +90,7 @@ Active Job is used to run background jobs, configured with Sidekiq for queuing b
 config.active_job.queue_adapter = :sidekiq
 ```
 
-To run Sidekiq, you can first start your redis server:
-```bash
-redis-server
-```
-
-then start sidekiq:
+To run Sidekiq:
 ```bash
 bundle exec sidekiq
 ```
@@ -126,10 +121,9 @@ To get started in your local sandbox:
 
 1. Checkout this repo during your `App configuration` stage, selecting MySQL and Redis as managed services.
 2. Populate database with seed data: `rails db:seed`
-3. Start rails server: `rails s -p PORT`
-4. Start redis server: `redis-server`
-5. Start sidekiq: `bundle exec sidekiq`
-6. Access any endpoint following authentication rules.
+3. Start rails server: `rails s`
+4. Start sidekiq: `bundle exec sidekiq`
+5. Access any endpoint following authentication rules.
 
 The following `App configuration` was used to create this API.
 ```yaml

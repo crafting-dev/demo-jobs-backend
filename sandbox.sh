@@ -10,9 +10,6 @@ sudo apt-get install libgmp3-dev -y
 echo '== Install mysql client =='
 sudo apt-get install mysql-client libmysqlclient-dev -y
 
-echo '== Install redis server =='
-sudo apt-get install redis-server -y
-
 echo '== Update system =='
 sudo apt-get update
 

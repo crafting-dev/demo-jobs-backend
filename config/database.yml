@@ -2,15 +2,15 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: batman
+  username: brucewayne
   ## WARNING!
   ## Password hardcoded for demo app use only!
   ## Set and use environment variables instead.
-  password: brucewayne
-  host: <%= ENV['MYSQL_SERVICE_HOST'] %>
+  password: batman
 
 development:
   <<: *default
+  host: <%= ENV['MYSQL_SERVICE_HOST'] %>
   database: superhero
 
 # Warning: The database defined as "test" will be erased and
@@ -18,6 +18,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  host: <%= ENV['MYSQLTEST_SERVICE_HOST'] %>
   database: superhero_test
 
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
