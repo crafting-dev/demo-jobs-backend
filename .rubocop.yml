@@ -1,7 +1,0 @@
-require: rubocop-rails
-
-AllCops:
-  NewCops: enable
-
-Layout/IndentationConsistency:
-  EnforcedStyle: indented_internal_methods
