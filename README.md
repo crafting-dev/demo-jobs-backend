@@ -117,8 +117,8 @@ rails db:seed
 Seed data contains the following sample credentials:
 | Model | Email | Password |
 | :--- | :--- | :--- |
-| Employer | bruce@justiceleague.com | iambatman |
-| Worker | clark@kentfarm.com | superman |
+| Employer | batman@crafting.dev | iambatman |
+| Worker | superman@crafting.dev | superman |
 
 ## Local setup
 
@@ -159,16 +159,16 @@ services:
 - managed_service:
     properties:
       database: superhero
-      password: brucewayne
-      username: batman
+      password: batman
+      username: brucewayne
     service_type: mysql
     version: "8"
   name: mysql
 - managed_service:
     properties:
       database: superhero_test
-      password: brucewayne
-      username: batman
+      password: batman
+      username: brucewayne
     service_type: mysql
     version: "8"
   name: mysqltest
