@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :worker do
-    name { 'MyString' }
-    email { 'MyString' }
-    password_digest { 'MyString' }
+    name { 'Clark Kent' }
+    email { 'superman@crafting.dev' }
+    password_digest { 'superman' }
     hourly_rate { '9.99' }
   end
 end

@@ -17,8 +17,8 @@ Employer.create!(
   id: 1,
   name: 'Bruce Wayne',
   email: 'bruce@justiceleague.com',
-  password: 'batman_superhero',
-  password_confirmation: 'batman_superhero',
+  password: 'iambatman',
+  password_confirmation: 'iambatman',
   location: 'Earth'
 )
 (2..25).each do |id|

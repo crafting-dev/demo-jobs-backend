@@ -6,6 +6,6 @@ FactoryBot.define do
     description { 'MyText' }
     employer { nil }
     hours { 1 }
-    status { 'MyString' }
+    status { 'posted' }
   end
 end

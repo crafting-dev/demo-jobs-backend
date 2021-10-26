@@ -117,7 +117,7 @@ rails db:seed
 Seed data contains the following sample credentials:
 | Model | Email | Password |
 | :--- | :--- | :--- |
-| Employer | bruce@justiceleague.com | batman_superhero |
+| Employer | bruce@justiceleague.com | iambatman |
 | Worker | clark@kentfarm.com | superman |
 
 ## Local setup

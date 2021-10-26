@@ -69,6 +69,13 @@ GEM
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
     crass (1.0.6)
+    database_cleaner-active_record (2.0.1)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
+    database_cleaner-redis (2.0.0)
+      database_cleaner-core (~> 2.0.0)
+      redis
     diff-lcs (1.4.4)
     erubi (1.10.0)
     factory_bot (6.2.0)
@@ -208,6 +215,8 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)
   byebug
+  database_cleaner-active_record
+  database_cleaner-redis
   factory_bot_rails
   faker
   jsonapi-serializer
