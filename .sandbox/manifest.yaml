@@ -1,0 +1,13 @@
+hooks:
+  post-checkout:
+    cmd: 'bundle install'
+  build:
+    cmd: './sandbox.sh'
+
+daemons:
+  app:
+    run:
+      cmd: |
+        rails s
+        redis-server
+        bundle exec sidekiq
