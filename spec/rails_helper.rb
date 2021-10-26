@@ -66,15 +66,20 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
 
+  ## Database cleaner configuration options
+  DatabaseCleaner[:redis].db = "redis://#{ENV['REDIS_SERVICE_HOST']}:#{ENV['REDIS_SERVICE_PORT']}/0"
+
   config.before(:suite) do
     DatabaseCleaner.clean_with(:deletion)
   end
 
   config.before(:each) do
+    DatabaseCleaner[:redis].strategy = :deletion
     DatabaseCleaner.strategy = :deletion
   end
 
   config.before(:each, js: true) do
+    DatabaseCleaner[:redis].strategy = :deletion
     DatabaseCleaner.strategy = :truncation
   end
 

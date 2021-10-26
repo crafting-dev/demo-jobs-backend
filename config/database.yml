@@ -19,7 +19,7 @@ development:
 test:
   <<: *default
   host: <%= ENV['MYSQLTEST_SERVICE_HOST'] %>
-  database: superhero_test
+  database: superherotest
 
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.

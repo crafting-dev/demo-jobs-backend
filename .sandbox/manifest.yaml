@@ -1,9 +1,8 @@
 hooks:
-  post-checkout:
-    cmd: 'bundle install'
   build:
-    cmd: './sandbox.sh'
-
+    cmd: |
+      ./sandbox.sh
+      bundle install
 daemons:
   app:
     run:

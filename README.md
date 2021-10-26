@@ -160,7 +160,7 @@ services:
   name: mysql
 - managed_service:
     properties:
-      database: superhero_test
+      database: superherotest
       password: batman
       username: brucewayne
     service_type: mysql
