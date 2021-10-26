@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   namespace :api do
     # API version v1
     namespace :v1 do
-      # Sessions
-      resources :sessions, only: %i[create destroy]
+      # Authentication
+      resources :api_keys, path: 'authenticate', only: %i[create destroy]
 
       # Employers
       resources :employers, only: %i[show create update destroy]

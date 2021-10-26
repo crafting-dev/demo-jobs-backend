@@ -10,19 +10,20 @@ module Api
 
       # GET /postings
       def index
-        @postings = Posting.includes(:applications, :tags, :employer)
-        render_json @postings
+        @postings = Posting.includes(:employer)
+        render_json @postings, :ok, { fields: { posting: %i[id title hours status employer created_at] } }
       end
 
       # GET /postings/:id
       def show
-        render_json @posting
+        render_json @posting, :ok, { params: { current_bearer: current_bearer } }
       end
 
       # POST /postings
       def create
         @posting = Posting.create!(posting_params)
-        render_json @posting, :created
+        ExpireJob.perform_in(14.days, 'posting', @posting.id)
+        render_json @posting, :created, { params: { current_bearer: current_bearer } }
       end
 
       # PUT /postings/:id
@@ -41,7 +42,7 @@ module Api
 
         # Define allowed parameters
         def posting_params
-          params.permit(:title, :description, :employer_id, :hours, :status)
+          params.require(:posting).permit(:title, :description, :employer_id, :hours, :status)
         end
 
         # Set the posting whose id == params[:id]

@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class Employer < ApplicationRecord
+  has_one :tag, as: :taggable, dependent: :destroy
+
   has_many :postings, dependent: :destroy
   has_many :applications, through: :postings, dependent: :destroy
-  has_many :tags, as: :taggable, dependent: :destroy
   has_many :api_keys, as: :bearer, dependent: :destroy
+
+  accepts_nested_attributes_for :tag, reject_if: proc { |attributes| attributes['content'].blank? }
 
   before_save :downcase_email
   has_secure_password

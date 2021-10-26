@@ -8,3 +8,6 @@ daemons:
   app:
     run:
       cmd: 'rails s'
+  sidekiq:
+    run:
+      cmd: 'bundle exec sidekiq'

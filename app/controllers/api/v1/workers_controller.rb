@@ -9,13 +9,13 @@ module Api
 
       # GET /workers/:id
       def show
-        render_json @worker
+        render_json @worker, :ok, { params: { current_bearer: current_bearer } }
       end
 
       # POST /workers
       def create
         @worker = Worker.create!(worker_params)
-        render_json @worker, :created
+        render_json @worker, :created, { params: { current_bearer: current_bearer } }
       end
 
       # PUT /workers/:id
@@ -34,7 +34,7 @@ module Api
 
         # Define allowed parameters
         def worker_params
-          params.permit(:name, :email, :password, :password_confirmation, :hourly_rate)
+          params.require(:worker).permit(:name, :email, :password, :password_confirmation, :hourly_rate)
         end
 
         # Set the worker whose id == params[:id]

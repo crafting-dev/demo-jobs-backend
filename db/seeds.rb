@@ -16,10 +16,10 @@ Rails.logger.debug '== Populating Employers =='
 Employer.create!(
   id: 1,
   name: 'Bruce Wayne',
-  email: 'bruce@justiceleague.com',
-  password: 'batman_superhero',
-  password_confirmation: 'batman_superhero',
-  location: 'Earth'
+  email: 'batman@crafting.dev',
+  password: 'iambatman',
+  password_confirmation: 'iambatman',
+  location: 'Gotham'
 )
 (2..25).each do |id|
   name = Faker::Name.name
@@ -57,7 +57,7 @@ Rails.logger.debug '== Populating Workers =='
 Worker.create!(
   id: 1,
   name: 'Clark Kent',
-  email: 'clark@kentfarm.com',
+  email: 'superman@crafting.dev',
   password: 'superman',
   password_confirmation: 'superman',
   hourly_rate: 0.0

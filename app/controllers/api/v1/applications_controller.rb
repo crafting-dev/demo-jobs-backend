@@ -10,18 +10,19 @@ module Api
 
       # GET /applications
       def index
-        @applications = current_bearer.applications.includes(:tags, :posting, :worker)
-        render_json @applications
+        @applications = current_bearer.applications.includes(:posting, :worker)
+        render_json @applications, :ok, { params: { is_collection: true } }
       end
 
       # GET /applications/:id
       def show
-        render_json @application
+        render_json @application, :ok, { params: { is_collection: false } }
       end
 
       # POST /applications
       def create
         @application = Application.create!(application_params)
+        ExpireJob.perform_in(7.days, 'application', @application.id)
         render_json @application, :created
       end
 
@@ -41,7 +42,7 @@ module Api
 
         # Define allowed parameters
         def application_params
-          params.permit(:content, :status, :posting_id, :worker_id)
+          params.require(:application).permit(:content, :status, :posting_id, :worker_id)
         end
 
         # Set the application whose id == params[:id]

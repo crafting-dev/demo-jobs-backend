@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :application do
     content { 'MyText' }
-    status { 'MyString' }
+    status { 'applied' }
     posting { nil }
     worker { nil }
   end
