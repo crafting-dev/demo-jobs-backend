@@ -23,7 +23,13 @@ API will respond with a new token in the form:
         "id": "123",
         "type": "api_key",
         "attributes": {
-            "token": "my_token"
+            "token": "my_token",
+            "bearer": {
+                "id": "456",
+                "name": "Bruce Wayne",
+                "email": "batman@crafting.dev",
+                "type": "Employer"
+            }
         }
     }
 }
