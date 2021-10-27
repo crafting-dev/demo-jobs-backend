@@ -7,6 +7,8 @@ module Api
 
       set_type :api_key
 
+      set_key_transform :camel_lower
+
       attribute :token, &:token_digest
 
       attribute :bearer do |_object, params|

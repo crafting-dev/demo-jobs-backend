@@ -7,6 +7,8 @@ module Api
 
       set_type :posting
 
+      set_key_transform :camel_lower
+
       attributes :title, :hours, :status, :description, :created_at
 
       attribute :employer do |object|
