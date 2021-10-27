@@ -74,13 +74,11 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    DatabaseCleaner[:redis].strategy = :deletion
     DatabaseCleaner.strategy = :deletion
   end
 
   config.before(:each, js: true) do
-    DatabaseCleaner[:redis].strategy = :deletion
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :deletion
   end
 
   config.before(:each) do

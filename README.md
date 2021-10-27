@@ -23,7 +23,13 @@ API will respond with a new token in the form:
         "id": "123",
         "type": "api_key",
         "attributes": {
-            "token": "my_token"
+            "token": "my_token",
+            "bearer": {
+                "id": "456",
+                "name": "Bruce Wayne",
+                "email": "batman@crafting.dev",
+                "type": "Employer"
+            }
         }
     }
 }
@@ -120,9 +126,9 @@ Seed data contains the following sample credentials:
 To get started in your local sandbox:
 
 1. Checkout this repo during your `App configuration` stage, selecting MySQL and Redis as managed services.
-2. Populate database with seed data: `rails db:seed`
-3. Start rails server: `rails s`
-4. Start sidekiq: `bundle exec sidekiq`
+2. Start sidekiq: `bundle exec sidekiq`
+3. Populate database with seed data: `rails db:seed`
+4. Start rails server: `rails s`
 5. Access any endpoint following authentication rules.
 
 The following `App configuration` was used to create this API.

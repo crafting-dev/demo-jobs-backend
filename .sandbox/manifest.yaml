@@ -3,6 +3,7 @@ hooks:
     cmd: |
       ./sandbox.sh
       bundle install
+
 daemons:
   app:
     run:
