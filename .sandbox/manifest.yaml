@@ -1,8 +1,6 @@
 hooks:
   build:
-    cmd: |
-      ./sandbox.sh
-      bundle install
+    cmd: './sandbox.sh'
 
 daemons:
   app:

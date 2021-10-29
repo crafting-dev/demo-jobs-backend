@@ -10,7 +10,7 @@ module Api
 
       # GET /applications
       def index
-        @applications = current_bearer.applications.includes(:posting, :worker)
+        @applications = current_bearer.applications.includes(:posting, :worker, :tag)
         render_json @applications, :ok, { params: { is_collection: true } }
       end
 

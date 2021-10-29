@@ -12,7 +12,7 @@ module Api
       attributes :status
 
       attribute :tags, if: proc { |record, params|
-                             !params[:is_collection] && record.tag.present?
+                             record.tag.present?
                            } do |object|
         object.tag.content
       end
