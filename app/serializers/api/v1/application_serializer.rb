@@ -7,6 +7,8 @@ module Api
 
       set_type :application
 
+      set_key_transform :camel_lower
+
       attributes :status
 
       attribute :tags, if: proc { |record, params|

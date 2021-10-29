@@ -25,10 +25,10 @@ API will respond with a new token in the form:
         "attributes": {
             "token": "my_token",
             "bearer": {
-                "id": "456",
-                "name": "Bruce Wayne",
-                "email": "batman@crafting.dev",
-                "type": "Employer"
+                "id": "",
+                "name": "",
+                "email": "",
+                "type": ""
             }
         }
     }
@@ -82,8 +82,8 @@ This API uses [jsonapi-serializer](https://github.com/jsonapi-serializer/jsonapi
 ```json
 {
     "data": {
-        "id": "XXX",
-        "type": "XXX",
+        "id": "",
+        "type": "",
         "attributes": { }
     }
 }

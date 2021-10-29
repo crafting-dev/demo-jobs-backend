@@ -5,7 +5,11 @@ module Api
     class EmployerSerializer
       include JSONAPI::Serializer
 
+      include AvatarHelper
+
       set_type :employer
+
+      set_key_transform :camel_lower
 
       attributes :name, :email, :location
 
@@ -17,6 +21,10 @@ module Api
 
       attribute :postings do |object|
         object.postings.select(:id, :title, :status)
+      end
+
+      attribute :avatar do |object|
+        avatar_url(object.email)
       end
     end
   end
