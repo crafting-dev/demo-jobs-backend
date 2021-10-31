@@ -11,7 +11,7 @@ module Api
 
       attributes :status
 
-      attribute :tags, if: proc { |record, params|
+      attribute :tags, if: proc { |record, _params|
                              record.tag.present?
                            } do |object|
         object.tag.content
