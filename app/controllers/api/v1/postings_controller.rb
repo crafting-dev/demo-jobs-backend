@@ -10,8 +10,8 @@ module Api
 
       # GET /postings
       def index
-        @postings = Posting.includes(:employer, :tag)
-        render_json @postings, :ok, { fields: { posting: %i[id title hours status tags employer created_at] } }
+        @postings = Posting.includes(:employer, :tag).order(created_at: :desc)
+        render_json @postings, :ok, { fields: { posting: %i[id title hours status tags description employer createdAt] } }
       end
 
       # GET /postings/:id
