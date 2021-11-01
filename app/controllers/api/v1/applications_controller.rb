@@ -22,7 +22,7 @@ module Api
       # POST /applications
       def create
         @application = Application.create!(application_params)
-        ExpireJob.perform_in(7.days, 'application', @application.id)
+        ExpireJob.set(wait: 7.days).perform_later('application', @application.id)
         render_json @application, :created
       end
 

@@ -34,6 +34,8 @@ module Api
           name: object.worker.name
         }
       end
+
+      attribute :created_at, &:created_at
     end
   end
 end

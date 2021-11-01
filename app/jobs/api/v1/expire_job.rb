@@ -5,6 +5,8 @@ module Api
     class ExpireJob < ApplicationJob
       queue_as :default
 
+      PostingHasActiveApplicationsException = Class.new(StandardError)
+
       retry_on PostingHasActiveApplicationsException, wait: 7.days
 
       def perform(class_type, id)
