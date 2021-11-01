@@ -19,14 +19,14 @@ Employer.create!(
   email: 'batman@crafting.dev',
   password: 'iambatman',
   password_confirmation: 'iambatman',
-  location: 'Gotham'
+  location: 'Gotham City'
 )
 (2..25).each do |id|
   name = Faker::Name.name
   email = Faker::Internet.unique.email(name: name)
   password = Faker::Internet.password(min_length: 8)
   password_confirmation = password
-  location = Faker::Address.full_address
+  location = "#{Faker::Address.city}, #{Faker::Address.country}"
 
   Employer.create!(
     id: id,
@@ -40,15 +40,14 @@ end
 
 Rails.logger.debug '== Populating Employers Tags =='
 (1..25).each do |id|
-  c1 = Faker::Job.title.split
-  c2 = Faker::Job.title.split
-  c3 = Faker::Job.field.split
-  c4 = c1 + c2 + c3
-  content = c4.uniq.join(', ')
+  tag = Faker::Job.title.split.join(', ').to_s
+  (1..rand(3...8)).each do |_i|
+    tag = "#{tag}, #{Faker::Job.title.split.join(', ')}"
+  end
 
   Tag.create!(
     taggable: Employer.find(id),
-    content: content
+    content: tag
   )
 end
 
@@ -60,7 +59,7 @@ Worker.create!(
   email: 'superman@crafting.dev',
   password: 'superman',
   password_confirmation: 'superman',
-  hourly_rate: 0.0
+  hourly_rate: 100
 )
 (2..50).each do |id|
   name = Faker::Name.name
@@ -81,26 +80,34 @@ end
 
 Rails.logger.debug '== Populating Workers Tags =='
 (1..50).each do |id|
-  c1 = Faker::Job.title.split
-  c2 = Faker::Job.title.split
-  c3 = Faker::Job.field.split
-  c4 = c1 + c2 + c3
-  content = c4.uniq.join(', ')
+  tag = Faker::Job.key_skill.split.join(', ').to_s
+  (1..rand(3...8)).each do |_i|
+    tag = "#{tag}, #{Faker::Job.key_skill.split.join(', ')}"
+  end
 
   Tag.create!(
     taggable: Worker.find(id),
-    content: content
+    content: tag
   )
 end
 
+greetings = %w[Hello Hi Greetings Hey]
+
 Rails.logger.debug '== Populating Postings =='
 (1..200).each do |id|
-  title = Faker::Job.title
-  description = [Faker::Job.employment_type, Faker::Job.field, Faker::Job.seniority, Faker::Job.position,
-                 'needed with a particular skill in', Faker::Job.key_skill].reject(&:empty?).join(' ')
+  title = "#{Faker::Job.employment_type} #{Faker::Job.title} in #{Faker::Job.field}"
+  description = [
+    "#{greetings.sample} there!",
+    'Hope this post finds you well.',
+    "We are looking for someone to fill the role of #{Faker::Job.title} on a #{Faker::Job.employment_type} basis.",
+    "Preference will be given to someone with a #{Faker::Job.education_level} education level, and at least #{rand(1...10)} years experience in the field.",
+    "We are especially looking for the key skill #{Faker::Job.key_skill}.",
+    "If you feel this post is relevant or interesting, don't hesitate to get in touch with us!",
+    "Field - #{Faker::Job.field}, Seniority - #{Faker::Job.seniority}."
+  ].join(' ')
   employer_id = rand(1..25)
   hours = rand(10..100)
-  status = %w[posted expired].sample
+  status = 'posted'
   created_at = Faker::Date.backward(days: 20)
 
   status = 'expired' if (Date.current - created_at) > 14
@@ -118,29 +125,32 @@ end
 
 Rails.logger.debug '== Populating Postings Tags =='
 (1..200).each do |id|
-  c1 = Faker::Job.title.split
-  c2 = Faker::Job.title.split
-  c3 = Faker::Job.field.split
-  c4 = c1 + c2 + c3
-  content = c4.uniq.join(', ')
+  tag = Faker::Job.key_skill.split.join(', ').to_s
+  (1..rand(3...8)).each do |_i|
+    tag = "#{tag}, #{Faker::Job.key_skill.split.join(', ')}"
+  end
 
   Tag.create!(
     taggable: Posting.find(id),
-    content: content
+    content: tag
   )
 end
 
 Rails.logger.debug '== Populating Applications =='
 (1..500).each do |id|
-  greeting = %w[Hi! Hello! Greetings! Hey!].sample
   posting_id = rand(1..200)
   worker_id = rand(1..50)
-  content = [greeting, 'I would like to apply to this position. I have attained my', Faker::Job.education_level,
-             'and have excellent', Faker::Job.key_skill, 'skills. Looking forward to hearing from you. Thanks!'].reject(&:empty?).join(' ')
-  status = %w[applied expired rejected hired].sample
+  content = [
+    "#{greetings.sample}! I would like to apply to this position.",
+    "I have about #{rand(1...20)} years experience in this role.",
+    "I have also completed my #{Faker::Job.education_level} with honours.",
+    "I have key skills in #{Faker::Job.key_skill}.",
+    'I look forward to hearing from you. Thanks!'
+  ].join(' ')
+  status = %w[applied rejected hired].sample
   created_at = Faker::Date.backward(days: 10)
 
-  status = 'expired' if (Date.current - created_at) > 7
+  status = 'expired' if (Date.current - created_at) > 7 && status == 'applied'
 
   Application.create!(
     id: id,
@@ -154,15 +164,14 @@ end
 
 Rails.logger.debug '== Populating Applications Tags =='
 (1..500).each do |id|
-  c1 = Faker::Job.title.split
-  c2 = Faker::Job.title.split
-  c3 = Faker::Job.field.split
-  c4 = c1 + c2 + c3
-  content = c4.uniq.join(', ')
+  tag = Faker::Job.key_skill.split.join(', ').to_s
+  (1..rand(3...8)).each do |_i|
+    tag = "#{tag}, #{Faker::Job.key_skill.split.join(', ')}"
+  end
 
   Tag.create!(
     taggable: Application.find(id),
-    content: content
+    content: tag
   )
 end
 
