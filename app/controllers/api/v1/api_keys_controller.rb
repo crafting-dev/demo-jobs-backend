@@ -8,10 +8,15 @@ module Api
       # POST /authenticate
       def create
         authenticate_with_http_basic do |email, password|
+          max_number_of_tokens_per_user = 5
+
           employer = Employer.find_by email: email
 
           if employer&.authenticate(password)
             token = SecureRandom.hex
+
+            employer.api_keys.last.destroy if employer.api_keys.count >= max_number_of_tokens_per_user
+
             api_key = employer.api_keys.create! token: token
             render_json ApiKey.new(id: api_key.id, token_digest: token), :created,
                         { params: { current_bearer: employer } }
@@ -22,6 +27,10 @@ module Api
 
           if worker&.authenticate(password)
             token = SecureRandom.hex
+
+            # Allow a maximum of 5 tokens per Worker model
+            worker.api_keys.last.destroy if worker.api_keys.count >= max_number_of_tokens_per_user
+
             api_key = worker.api_keys.create! token: token
             render_json ApiKey.new(id: api_key.id, token_digest: token), :created,
                         { params: { current_bearer: worker } }

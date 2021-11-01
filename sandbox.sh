@@ -18,3 +18,6 @@ gem install rails
 
 echo '== Run all migrations =='
 rails db:migrate
+
+echo '== Bundle install =='
+bundle install

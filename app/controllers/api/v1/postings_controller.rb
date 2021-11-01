@@ -10,8 +10,9 @@ module Api
 
       # GET /postings
       def index
-        @postings = Posting.includes(:employer)
-        render_json @postings, :ok, { fields: { posting: %i[id title hours status employer created_at] } }
+        @postings = Posting.includes(:employer, :tag).order(created_at: :desc)
+        render_json @postings, :ok,
+                    { fields: { posting: %i[id title hours status tags description employer createdAt] } }
       end
 
       # GET /postings/:id
@@ -22,7 +23,7 @@ module Api
       # POST /postings
       def create
         @posting = Posting.create!(posting_params)
-        ExpireJob.perform_in(14.days, 'posting', @posting.id)
+        ExpireJob.set(wait: 14.days).perform_later('posting', @posting.id)
         render_json @posting, :created, { params: { current_bearer: current_bearer } }
       end
 
