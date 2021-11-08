@@ -43,7 +43,8 @@ module Api
 
         # Define allowed parameters
         def posting_params
-          params.require(:posting).permit(:title, :description, :employer_id, :hours, :status)
+          params.require(:posting).permit(:title, :description, :employer_id, :hours, :status,
+                                          tag_attributes: [:content])
         end
 
         # Set the posting whose id == params[:id]
