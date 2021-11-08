@@ -34,7 +34,8 @@ module Api
 
         # Define allowed parameters
         def worker_params
-          params.require(:worker).permit(:name, :email, :password, :password_confirmation, :hourly_rate)
+          params.require(:worker).permit(:name, :email, :password, :password_confirmation, :hourly_rate,
+                                         tag_attributes: [:content])
         end
 
         # Set the worker whose id == params[:id]

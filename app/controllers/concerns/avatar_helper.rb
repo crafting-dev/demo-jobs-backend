@@ -6,7 +6,7 @@ module AvatarHelper
   class_methods do
     def avatar_url(email)
       gravatar_id = Digest::MD5.hexdigest(email)
-      "https://secure.gravatar.com/avatar/#{gravatar_id}"
+      "https://secure.gravatar.com/avatar/#{gravatar_id}?d=identicon"
     end
   end
 end
