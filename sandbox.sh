@@ -19,5 +19,14 @@ gem install rails
 echo '== Bundle install =='
 bundle install
 
+echo '== Wait for mysql service until it is ready =='
+cs wait service mysql
+
 echo '== Run all migrations =='
 rails db:migrate
+
+echo '== Wait for redis service until it is ready =='
+cs wait service redis
+
+echo '== Seed database with demo data =='
+rails db:seed
