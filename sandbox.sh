@@ -16,8 +16,8 @@ sudo apt-get install mysql-client libmysqlclient-dev -y
 echo '== Install latest rails =='
 gem install rails
 
-echo '== Run all migrations =='
-rails db:migrate
-
 echo '== Bundle install =='
 bundle install
+
+echo '== Run all migrations =='
+rails db:migrate
