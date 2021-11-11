@@ -142,7 +142,7 @@ endpoints:
       path_prefix: /
   name: api
 services:
-- description: 'Rails backend '
+- description: Rails backend
   name: backend
   workspace:
     checkouts:
@@ -177,5 +177,24 @@ services:
     version: "6.2"
   name: redis
 ```
+
+## Notes and Caveats
+
+Sandbox external URL `https://XXX.sandboxes.run` is readily available for development. But if you are using local Visual Studio Code and want some remote ports locally available, you can define [workspace settings](https://code.visualstudio.com/docs/getstarted/settings) to [forward](https://code.visualstudio.com/docs/remote/ssh#_forwarding-a-port-creating-ssh-tunnel) the desired remote ports to your local machine. 
+
+For example, to forward port `3001` locally, you can create the file `.vscode/settings.json` and add:
+```json
+{
+  "remote.SSH.defaultForwardedPorts": [
+    {
+      "localPort": 3001,
+      "name": "api",
+      "remotePort": 3001
+    }
+  ]
+}
+```
+
+Then `http://localhost:3001` will be accessible for local development. 
 
 You can take a look at [Demo Jobs UI](https://github.com/crafting-dev/demo-jobs-ui) for an example UI app that consumes this API.
