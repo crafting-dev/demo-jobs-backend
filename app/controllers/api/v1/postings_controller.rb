@@ -10,7 +10,6 @@ module Api
 
       # GET /postings
       def index
-        Rails.logger.info("-------------------------New Log---------------------------------------")
         @postings = Posting.includes(:employer, :tag).order(created_at: :desc)
         render_json @postings, :ok,
                     { fields: { posting: %i[id title hours status tags description employer createdAt] } }
