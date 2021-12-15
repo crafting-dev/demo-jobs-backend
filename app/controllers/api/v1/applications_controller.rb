@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# For demo test
+
 module Api
   module V1
     class ApplicationsController < ApplicationController
