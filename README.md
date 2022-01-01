@@ -118,8 +118,8 @@ rails db:seed
 Seed data contains the following sample credentials:
 | Model | Email | Password |
 | :--- | :--- | :--- |
-| Employer | batman@crafting.dev | ulieckrapo |
-| Worker | superman@crafting.dev | yrieltioun |
+| Employer | batman@crafting.dev | crafting.dev |
+| Worker | superman@crafting.dev | crafting.dev |
 
 ## Local setup
 
