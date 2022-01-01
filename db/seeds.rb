@@ -17,8 +17,8 @@ Employer.create!(
   id: 1,
   name: 'Bruce Wayne',
   email: 'batman@crafting.dev',
-  password: 'iambatman',
-  password_confirmation: 'iambatman',
+  password: 'ulieckrapo',
+  password_confirmation: 'ulieckrapo',
   location: 'Gotham City'
 )
 (2..25).each do |id|
@@ -57,8 +57,8 @@ Worker.create!(
   id: 1,
   name: 'Clark Kent',
   email: 'superman@crafting.dev',
-  password: 'superman',
-  password_confirmation: 'superman',
+  password: 'yrieltioun',
+  password_confirmation: 'yrieltioun',
   hourly_rate: 100
 )
 (2..50).each do |id|
