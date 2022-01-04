@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   namespace :api do
+    get 'status', to: 'status#show'
     # API version v1
     namespace :v1 do
       # Authentication
