@@ -3,7 +3,7 @@
 module Api
   class StatusController < ApplicationController
     def show
-      render json: {status: "Healthy"}, status: :ok
+      render json: { status: 'Healthy' }, status: :ok
     end
   end
-end    
+end
