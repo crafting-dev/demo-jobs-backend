@@ -131,51 +131,40 @@ To get started in your local sandbox:
 4. Start rails server: `rails s`
 5. Access any endpoint following authentication rules.
 
-The following `App configuration` was used to create this API.
+The following [App Definition](https://docs.sandboxes.cloud/docs/app-definition) was used to create this API.
 ```yaml
 endpoints:
-- http:
+- name: api
+  http:
     routes:
-    - backend:
-        port: api
+    - pathPrefix: "/"
+      backend:
         target: backend
-      path_prefix: /
-  name: api
-services:
-- description: Rails backend
-  name: backend
-  workspace:
-    checkouts:
-    - path: src/backend
-      repo:
-        git: https://github.com/crafting-dev/demo-jobs-backend.git
-    packages:
-    - name: ruby
-      version: ~2.7
-    ports:
-    - name: api
-      port: 3001
-      protocol: HTTP/TCP
-- managed_service:
-    properties:
-      database: superhero
-      password: batman
-      username: brucewayne
-    service_type: mysql
-    version: "8"
-  name: mysql
-- managed_service:
-    properties:
-      database: superherotest
-      password: batman
-      username: brucewayne
-    service_type: mysql
-    version: "8"
-  name: mysqltest
-- managed_service:
-    service_type: redis
-    version: "6.2"
-  name: redis
+        port: api
+    authProxy:
+      disabled: true
+workspaces:
+- name: backend
+  description: Demo App backend using Ruby on Rails
+  ports:
+  - name: api
+    port: 3001
+    protocol: HTTP/TCP
+  checkouts:
+  - path: backend
+    repo:
+      git: https://github.com/crafting-dev/demo-jobs-backend
+  packages:
+  - name: ruby
+    version: 2.7.2
+dependencies:
+- name: mysql
+  serviceType: mysql
+  version: '8'
+  properties:
+    database: superhero
+    password: batman
+    username: brucewayne
 ```
 
 ## Notes and Caveats
