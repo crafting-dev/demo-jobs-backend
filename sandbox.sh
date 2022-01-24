@@ -31,4 +31,4 @@ cs wait service redis
 echo '== Seed database with demo data =='
 rails db:seed
 
-echo "Done!"
+echo "== Done! =="
