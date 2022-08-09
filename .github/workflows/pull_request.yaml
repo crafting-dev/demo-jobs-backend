@@ -10,4 +10,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           msg: |
-            Preview this PR in a [Crafting Sandbox](https://sandboxes.cloud/create?app=demo&ws_api_co_backend_version=${{github.ref_name}}&autolaunch=true)!
+            Preview this PR in a [Crafting Sandbox](https://sandboxes.cloud/create?app=demo&ws_api_co_backend_version=${{github.sha}}&autolaunch=true)!
