@@ -1,0 +1,13 @@
+on: pull_request
+jobs:
+  comment:
+    name: comment with sandbox link
+    runs-on: ubuntu-latest
+    steps:
+      - name: comment PR
+        uses: unsplash/comment-on-pr@v1.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: |
+            Preview this PR in a [Crafting Sandbox](https://sandboxes.cloud/create?app=demo&ws_api_co_backend_version=${{github.ref_name}}&autolaunch=true)!
