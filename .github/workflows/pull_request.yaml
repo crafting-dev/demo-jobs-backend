@@ -9,5 +9,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          check_for_duplicate_msg: false
           msg: |
             Preview this PR in a [Crafting Sandbox](https://sandboxes.cloud/create?app=demo&ws_api_co_backend_version=${{github.sha}}&autolaunch=true)!
