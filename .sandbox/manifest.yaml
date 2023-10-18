@@ -1,3 +1,6 @@
+env:
+- PATH=$HOME/.rbenv/shims:$PATH
+
 hooks:
   build:
     cmd: ./sandbox.sh
@@ -5,7 +8,7 @@ hooks:
 daemons:
   app:
     run:
-      cmd: PATH=$HOME/.rbenv/shims:"$PATH" rails s -b 0.0.0.0 -p 3001
+      cmd: rails s -b 0.0.0.0 -p 3001
   sidekiq:
     run:
-      cmd: PATH=$HOME/.rbenv/shims:"$PATH" bundle exec sidekiq
+      cmd: bundle exec sidekiq
