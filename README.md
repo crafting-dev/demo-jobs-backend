@@ -154,9 +154,6 @@ workspaces:
   - path: backend
     repo:
       git: https://github.com/crafting-dev/demo-jobs-backend
-  packages:
-  - name: ruby
-    version: 2.7.2
 dependencies:
 - name: mysql
   serviceType: mysql
