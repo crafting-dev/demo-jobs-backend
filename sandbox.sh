@@ -24,6 +24,7 @@ gem install rails
 
 echo '== Bundle install =='
 bundle install
+rbenv rehash
 
 echo '== Wait for mysql service until it is ready =='
 cs wait service mysql
