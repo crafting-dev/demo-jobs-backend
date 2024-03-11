@@ -41,34 +41,34 @@ module Api
 
       private
 
-        # Define allowed parameters
-        def posting_params
-          params.require(:posting).permit(:title, :description, :employer_id, :hours, :status,
-                                          tag_attributes: [:content])
-        end
+      # Define allowed parameters
+      def posting_params
+        params.require(:posting).permit(:title, :description, :employer_id, :hours, :status,
+                                        tag_attributes: [:content])
+      end
 
-        # Set the posting whose id == params[:id]
-        # If no record is found, raises an ActiveRecord::RecordNotFound error
-        def set_posting
-          @posting = Posting.find(params[:id])
-        end
+      # Set the posting whose id == params[:id]
+      # If no record is found, raises an ActiveRecord::RecordNotFound error
+      def set_posting
+        @posting = Posting.find(params[:id])
+      end
 
-        # Set serializer for renderable
-        def serializer
-          PostingSerializer
-        end
+      # Set serializer for renderable
+      def serializer
+        PostingSerializer
+      end
 
-        # Check profile authorization
-        def is_authorized
-          unless current_bearer.instance_of?(Employer) && current_bearer.id == @posting.employer_id
-            render status: :unauthorized
-          end
+      # Check profile authorization
+      def is_authorized
+        unless current_bearer.instance_of?(Employer) && current_bearer.id == @posting.employer_id
+          render status: :unauthorized
         end
+      end
 
-        # Check whether current_bearer has create privileges
-        def can_create
-          render status: :unauthorized unless current_bearer.instance_of?(Employer)
-        end
+      # Check whether current_bearer has create privileges
+      def can_create
+        render status: :unauthorized unless current_bearer.instance_of?(Employer)
+      end
     end
   end
 end
